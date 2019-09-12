@@ -1,5 +1,5 @@
 module.exports = addAlunos;
-let db = require('../db.js')
+const db = require("../../db.js");
 function addAlunos(context,cb){
     let queryInsert = ``;
     let queryValues = [

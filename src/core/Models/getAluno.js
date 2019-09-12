@@ -1,5 +1,5 @@
 module.exports = getAluno;
-let db = require('../db.js')
+const db = require("../../db.js");
 function getAluno(context,cb){
     let queryWhere = ``;
     let queryInsert = ``;

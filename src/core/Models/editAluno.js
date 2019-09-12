@@ -1,4 +1,4 @@
-const db = require('../db.js');
+const db = require("../../db.js");
 
 function editAluno(context,cb){
     let queryValues = [context.nome, context.id];

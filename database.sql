@@ -1,17 +1,26 @@
-CREATE TABLE disciplina (
-    id int SERIAL,
-    nome varchar(250) NOT NULL,
-    horarios... -- mínimo 1, máximo 4)
-)
-drop table alunos
-select * FROM alunos where id = 1
+CREATE TABLE disciplinas (
+    id SERIAL PRIMARY KEY,
+    nome varchar(250) NOT NULL
+);
+
+CREATE TABLE horarios (
+	id_horario SERIAL primary key,
+    id_disciplina integer not Null,
+    horario TIME,
+    dia_da_semana int,
+    foreign key(id_disciplina) references disciplinas(id)
+);
+
 CREATE TABLE alunos (
-    id SERIAL,
+    id SERIAL PRIMARY KEY,
     nome varchar(250)
-)
+);
 
 CREATE TABLE matriculas (
-    id int SERIAL,
-    id_disciplina REFERENCES disciplina(id),
-    id_aluno REFERENCES alunos(id)
-)
+    id SERIAL PRIMARY KEY,
+    id_disciplina integer,
+    id_aluno integer,
+    id_horarios int[],
+    foreign key(id_disciplina) references disciplinas(id),
+    foreign key(id_aluno) references alunos(id)
+);

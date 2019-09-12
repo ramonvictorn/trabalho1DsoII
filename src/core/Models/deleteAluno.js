@@ -1,4 +1,4 @@
-const db = require('../db.js');
+const db = require("../../db.js");
 module.exports = deleteAluno;
 function deleteAluno(context,cb){
     let queryValues = [];
@@ -9,7 +9,7 @@ function deleteAluno(context,cb){
         queryValues.push(context.id);
         queryDelete += ` id = $${queryValues.length}`;
     }
-
+    queryDelete+= ` RETURNING id,nome `
     db.query(queryDelete,queryValues,(err,dataFromDb)=>{
         if(err){
             cb({error:'ERROR_ON_DELETE_ALUNO'})
