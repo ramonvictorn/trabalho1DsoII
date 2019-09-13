@@ -20,8 +20,7 @@ function editDisciplina(context,cb){
 
     queryUpdate+= ` ${queryWhere} RETURNING
         id,
-        nome,
-        horarios`;
+        nome`;
     db.query(queryUpdate,queryValues,(err,dataDb)=>{
         if(err){
             cb({error: 'ERROR_ON_EDIT_DISCIPLINA'});

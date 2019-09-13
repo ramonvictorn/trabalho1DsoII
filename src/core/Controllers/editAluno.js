@@ -1,12 +1,12 @@
 const editAlunoModel = require('../Models/editAluno.js');
 module.exports = editAluno;
 function editAluno(req,res){
-    if(!verifyParam(req)){
+    if(!verifyParam(req.body)){
         res.status(400).send({error:"INVALID_PARAMS"})
     }
 
     let context ={
-        id: req.params.id,
+        id: req.body.id,
         nome: req.body.nome,
     }
     editAlunoModel(context,(dataRet)=>{
@@ -19,7 +19,7 @@ function editAluno(req,res){
 }
 
 function verifyParam(params){
-    if(params.params.id == undefined ) return false;
-    if(params.body.nome == undefined) return false;
+    if(params.id == undefined ) return false;
+    if(params.nome == undefined) return false;
     return true;
 }

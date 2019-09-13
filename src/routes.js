@@ -11,6 +11,7 @@ const addDisciplinaController = require('./core/Controllers/addDisciplina.js');
 const getDisciplinasController = require('./core/Controllers/getDiscplinas.js');
 const deleteDisciplinaController = require('./core/Controllers/deleteDisciplina.js');
 const editDisciplinaController = require('./core/Controllers/editDisciplina.js');
+const getHorariosByDisciplinaController = require('./core/Controllers/getHorariosByDisciplina.js');
 
 // horarios
 const addHorariosController = require('./core/Controllers/addHorario.js');
@@ -28,7 +29,7 @@ function initRoutes(app){
         db.query
         res.send(`daaaaa ${ db.query}`);
     })
-    app.put('/alunos/:id',editAlunoController);
+    app.put('/alunos',editAlunoController);
     app.post('/alunos', addAlunosController);
     app.get('/alunos/:id*?', getAlunoController);
     app.delete('/alunos', deleteAlunosController);
@@ -37,9 +38,10 @@ function initRoutes(app){
     app.get('/disciplinas/:id?', getDisciplinasController);
     app.delete('/disciplinas/:id?', deleteDisciplinaController);
     app.put('/disciplinas/', editDisciplinaController);
+    app.get('/disciplina/horarios', getHorariosByDisciplinaController);
 
     app.post('/horarios/',addHorariosController);
-
+    
     app.post("/matriculas/", verificarSeMatriculaJaExiste, addMatriculasController);
     app.post('/matriculas/disciplina' , getMatriculasDisciplinaController)
 }

@@ -24,3 +24,13 @@ CREATE TABLE matriculas (
     foreign key(id_disciplina) references disciplinas(id),
     foreign key(id_aluno) references alunos(id)
 );
+
+
+
+SELECT 
+    *
+FROM 
+    disciplinas as d
+    INNER JOIN horarios as d
+    ON 
+		d.id = h.id_disciplina;
