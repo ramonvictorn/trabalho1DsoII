@@ -5,7 +5,23 @@ function getHorarios(context,cb){
     let queryInsert = ``;
     let queryValues = [];
 
-    let queryString = `SELECT * FROM horarios WHERE id_horario = ${context.idsHorarios};`
+    let queryString = `SELECT 
+        id_horario as "idHorario",
+        id_disciplina as "idDisciplina",
+        horario,
+        dia_da_semana as "diaDaSemana"
+        FROM horarios`
+    
+        if(context.idHorario){
+            queryString += queryValues.length >= 1 ?  'AND': ' WHERE '
+            queryValues.push(context.idHorario);
+            queryString += ` id_horario = $${queryValues.length}`
+        }
+        if(context.idDisciplina){
+            queryString += queryValues.length >= 1 ?  'AND': ' WHERE '
+            queryValues.push(context.idDisciplina);
+            queryString += ` id_disciplina = $${queryValues.length}`
+        }
 
     db.query(queryString, queryValues, (err,res)=>{   
         if(err){
@@ -17,4 +33,3 @@ function getHorarios(context,cb){
         
     })
 }
-// addAlunos()

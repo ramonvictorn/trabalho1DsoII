@@ -3,7 +3,7 @@ const db = require("../../db.js");
 function editDisciplina(context,cb){
     let queryValues = [];
     let queryUpdate = `UPDATE disciplinas SET`;
-    let queryWhere = ` WHERE id = ${context.id}`
+    let queryWhere = ` WHERE id_disciplina = ${context.idDisciplina}`
     if(context.nome){
         queryValues.push(context.nome);
         queryUpdate+= queryValues.length > 0 
@@ -12,14 +12,8 @@ function editDisciplina(context,cb){
         // queryUpdate+= ` nome = ${queryValues.length}`
     }
 
-    if(context.horario){
-        // queryValues.push(context.horario);
-        // queryUpdate+= queryValues.length > 0 ? ` AND ` : ` WHERE `;
-        // queryUpdate+= ` horario = ${queryValues.length}`
-    }
-
     queryUpdate+= ` ${queryWhere} RETURNING
-        id,
+        id_disciplina as "idDisciplina",
         nome`;
     db.query(queryUpdate,queryValues,(err,dataDb)=>{
         if(err){

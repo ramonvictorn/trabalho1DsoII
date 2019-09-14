@@ -10,13 +10,16 @@ function getDisciplinas(context,cb){
         queryValues.push(context.nome);
         queryWhere += ` nome = $${queryValues.length} `
     }
-    if(context.id){
+    if(context.idDisciplina){
         queryWhere += queryValues.length >= 1 ?  'AND': ' WHERE '
-        queryValues.push(context.id);
-        queryWhere += ` id = $${queryValues.length}`
+        queryValues.push(context.idDisciplina);
+        queryWhere += ` id_disciplina = $${queryValues.length}`
     }
 
-    let queryString = `SELECT * FROM disciplinas ${queryWhere};`
+    let queryString = `SELECT 
+        id_disciplina as "idDisciplina",
+        nome 
+    FROM disciplinas ${queryWhere};`
 
     db.query(queryString, queryValues, (err,res)=>{   
         if(err){

@@ -8,7 +8,7 @@ function addMatricula(req,res){
     let context = {
         idDisciplina: req.body.idDisciplina,
         idAluno: req.body.idAluno,
-        idsHorarios: req.body.idsHorarios,
+        idHorario: req.body.idHorario,
     }
 
     addMatriculaModel(context,(dataRet)=>{

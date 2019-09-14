@@ -15,7 +15,7 @@ const getHorariosByDisciplinaController = require('./core/Controllers/getHorario
 
 // horarios
 const addHorariosController = require('./core/Controllers/addHorario.js');
-
+const getHorariosController = require('./core/Controllers/getHorarios.js')
 
 // matriculas
 const addMatriculasController = require('./core/Controllers/addMatricula.js');
@@ -40,7 +40,9 @@ function initRoutes(app){
     app.put('/disciplinas/', editDisciplinaController);
     app.get('/disciplina/horarios', getHorariosByDisciplinaController);
 
-    app.post('/horarios/',addHorariosController);
+    app.post('/horarios',addHorariosController);
+    app.get('/horarios',getHorariosController);
+
     
     app.post("/matriculas/", verificarSeMatriculaJaExiste, addMatriculasController);
     app.post('/matriculas/disciplina' , getMatriculasDisciplinaController)

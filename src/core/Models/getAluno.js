@@ -13,10 +13,13 @@ function getAluno(context,cb){
     if(context.id){
         queryWhere += queryValues.length >= 1 ?  'AND': ' WHERE '
         queryValues.push(context.id);
-        queryWhere += ` id = $${queryValues.length}`
+        queryWhere += ` id_aluno = $${queryValues.length}`
     }
 
-    let queryString = `SELECT * FROM alunos ${queryWhere};`
+    let queryString = `SELECT 
+        id_aluno as "idAluno",
+        nome
+        FROM alunos ${queryWhere};`
 
     db.query(queryString, queryValues, (err,res)=>{   
         if(err){

@@ -6,7 +6,7 @@ function editAluno(req,res){
     }
 
     let context ={
-        id: req.body.id,
+        idAluno: req.body.idAluno,
         nome: req.body.nome,
     }
     editAlunoModel(context,(dataRet)=>{
@@ -19,7 +19,7 @@ function editAluno(req,res){
 }
 
 function verifyParam(params){
-    if(params.id == undefined ) return false;
+    if(params.idAluno == undefined ) return false;
     if(params.nome == undefined) return false;
     return true;
 }

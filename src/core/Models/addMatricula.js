@@ -2,12 +2,12 @@ const db = require("../../db.js");
 const getHorariosModel = require('./getHorarios.js');
 module.exports = addMatricula;
 function addMatricula(context,cb){
-    let queryInsert = `INSERT INTO matriculas (id_disciplina,id_aluno, id_horarios)
-        VALUES ($1,$2,Array[${context.idsHorarios}])
+    let queryInsert = `INSERT INTO matriculas (id_disciplina,id_aluno, id_horario)
+        VALUES ($1,$2,Array[${context.idHorario}])
         RETURNING
             id_disciplina as "idDisciplina",
             id_aluno as "idAluno", 
-            id_horarios as "idsHorarios" ;`;
+            id_horario as "idHorario" ;`;
             
     let queryValues = [
         context.idDisciplina,
@@ -33,7 +33,7 @@ function addMatricula(context,cb){
 function verificarConflitosHorarios(context,cb){
     let arrayIds = [];
     let querySelect = `SELECT
-        id_horarios as "idHorarios" 
+        id_horario as "idHorario" 
     FROM matriculas WHERE id_aluno = ${context.idAluno};`
    
     db.query(querySelect,null, (err,data)=>{
@@ -41,7 +41,7 @@ function verificarConflitosHorarios(context,cb){
             //cb({err:"ERROR_ON_VERIFICAR_CONFLITOS_MATRICULA"})
         }else{
             data.rows.forEach(element => {
-                element.idHorarios.forEach(elementId => {
+                element.idHorario.forEach(elementId => {
                     elementId.forEach(id => {
                         arrayIds.push(id)
                     });
@@ -67,7 +67,7 @@ function PegarHorarioById(context,cb){
     let posAtual = 0;
     loop();
     function loop(){
-        getHorariosModel({idsHorarios:context.arrayDeIds[posAtual]},(dataRet)=>{
+        getHorariosModel({idHorario:context.arrayDeIds[posAtual]},(dataRet)=>{
             posAtual++;
             console.log('getHorariosModel veio - > ',dataRet.data.horario);
             if(dataRet.data.horario == context.horarioPedido){

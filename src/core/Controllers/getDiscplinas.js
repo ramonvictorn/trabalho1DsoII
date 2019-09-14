@@ -7,7 +7,7 @@ function getDisciplinas(req,res){
     }
     let context = {
         nome: req.body.nome,
-        id:req.params.id,
+        idDisciplina:req.params.id,
     }
 
     getDisciplinasModel(context, (dataRet)=>{

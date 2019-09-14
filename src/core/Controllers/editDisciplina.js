@@ -6,9 +6,8 @@ function editDisciplina(req,res){
     }
 
     let context ={
-        id: req.body.id,
+        idDisciplina: req.body.idDisciplina,
         nome: req.body.nome,
-        horarios: req.body.horarios,
     }
     editDisciplinaModel(context,(dataRet)=>{
         if(dataRet.error){
@@ -20,7 +19,7 @@ function editDisciplina(req,res){
 }
 
 function verifyParam(params){
-    if(params.id == undefined ) return false;
+    if(params.idDisciplina == undefined ) return false;
     if(params.nome == undefined && params.horarios == undefined) return false;
     return true;
 }

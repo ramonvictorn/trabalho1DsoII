@@ -6,7 +6,7 @@ function addDisciplina(context,cb){
         VALUES 
             ('${context.nome}')
         RETURNING
-            id,    
+            id_disciplina as "idDisciplina",    
             nome;`;
 
     db.query(queryInsert,null, (err,data)=>{

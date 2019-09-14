@@ -11,7 +11,7 @@ function addAlunos(context,cb){
     VALUES 
         ($1)
     RETURNING 
-        id,
+        id_aluno as "idAluno",
         nome;`
 
     db.query(queryString, queryValues, (err,res)=>{   
