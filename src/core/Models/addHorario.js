@@ -1,10 +1,10 @@
 const db = require("../../db.js");
 module.exports = addHorario;
 function addHorario(context,cb){
-    let queryInsert = `INSERT INTO horarios (id_disciplina,id_horario, dia_da_semana)
+    let queryInsert = `INSERT INTO horarios (id_disciplina,horario, dia_da_semana)
         VALUES ($1,$2,$3)
         RETURNING
-            id_horarios as "idHorario",
+            id_horario as "idHorario",
             id_disciplina as "idDisciplina",
             dia_da_semana as "diaDaSemana", 
             horario ;`;

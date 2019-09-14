@@ -20,6 +20,7 @@ const getHorariosController = require('./core/Controllers/getHorarios.js')
 // matriculas
 const addMatriculasController = require('./core/Controllers/addMatricula.js');
 const getMatriculasDisciplinaController = require("./core/Controllers/getMatriculasDisciplina.js");
+const deleteMatriculaController = require('./core/Controllers/deleteMatricula.js');
 
 
 //midlewares
@@ -45,6 +46,7 @@ function initRoutes(app){
 
     
     app.post("/matriculas/", verificarSeMatriculaJaExiste, addMatriculasController);
-    app.post('/matriculas/disciplina' , getMatriculasDisciplinaController)
+    app.post('/matriculas/disciplina' , getMatriculasDisciplinaController);
+    app.delete('/matriculas',deleteMatriculaController);
 }
 module.exports = initRoutes;

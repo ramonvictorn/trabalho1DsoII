@@ -21,7 +21,7 @@ function addMatricula(req,res){
 }
 
 function verifyParams(params){
-    if(isNaN(params.idDisciplina)) return false;
+    //if(isNaN(params.idDisciplina)) return false;
     if(params.idAluno == undefined) return false;
     // if(typeof params.idHorario != "array") return false;
     return true;

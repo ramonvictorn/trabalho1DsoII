@@ -2,19 +2,19 @@ const db = require("../../db.js");
 const getHorariosModel = require('./getHorarios.js');
 module.exports = addMatricula;
 function addMatricula(context,cb){
-    let queryInsert = `INSERT INTO matriculas (id_disciplina,id_aluno, id_horario)
-        VALUES ($1,$2,Array[${context.idHorario}])
+    let queryInsert = `INSERT INTO matriculas (id_aluno, id_horario)
+        VALUES ($1,$2)
         RETURNING
-            id_disciplina as "idDisciplina",
+            id,
             id_aluno as "idAluno", 
             id_horario as "idHorario" ;`;
             
     let queryValues = [
-        context.idDisciplina,
         context.idAluno,
+        context.idHorario,
     ]
     getHorariosModel(context,(dataRet)=>{
-        //console.log('DO getHorariosModel veio ->  ', dataRet);
+        console.log('DO getHorariosModel veio ->  ', dataRet);
         context.horarioPedido = dataRet.data.horario;
         verificarConflitosHorarios(context,(dataRet)=>{
             console.log("foi tudo, DEU CONFLITO ->", dataRet);
@@ -23,7 +23,7 @@ function addMatricula(context,cb){
                     cb({data:data.rows});
                 })
             }else{
-                cb({data:"nao deu cara"});
+                cb({data:"NÃO FOI POSSIVEL"});
             }
         });
     })
@@ -38,14 +38,10 @@ function verificarConflitosHorarios(context,cb){
    
     db.query(querySelect,null, (err,data)=>{
         if(err){
-            //cb({err:"ERROR_ON_VERIFICAR_CONFLITOS_MATRICULA"})
+            cb({err:"ERROR_ON_VERIFICAR_CONFLITOS_MATRICULA"})
         }else{
             data.rows.forEach(element => {
-                element.idHorario.forEach(elementId => {
-                    elementId.forEach(id => {
-                        arrayIds.push(id)
-                    });
-                });
+                arrayIds.push(element.idHorario)
             });
             //console.log('antes do cb IDS HORARIO DESSE ALUNO -> ', arrayIds)
             context.arrayDeIds = arrayIds;
@@ -85,3 +81,7 @@ function PegarHorarioById(context,cb){
         })
     }
 }
+
+
+// ver que horario enviado
+//depois ve se tem conflito
